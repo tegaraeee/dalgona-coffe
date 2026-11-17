@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6ead8">
+  <title>Dalgona Coffee Simulator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="brand"><span class="brand-icon">☕</span><div><strong>DALGONA</strong><small>COFFEE STUDIO</small></div></div>
+      <div class="top-actions"><span class="pill" id="levelPill">RESEP 01</span><span class="pill timer">⏱ <b id="timer">00:00</b></span></div>
+    </header>
+
+    <section class="intro">
+      <div><p class="eyebrow">A LITTLE COFFEE, A LOT OF JOY</p><h1>Buat Dalgona<br><em>Coffee-mu!</em></h1><p class="intro-copy">Ikuti langkahnya, racik bahan-bahannya, dan sajikan kopi cantik buatanmu sendiri.</p></div>
+      <div class="intro-art" aria-hidden="true"><span class="steam s1"></span><span class="steam s2"></span><div class="hero-cup"><div class="hero-foam"></div><div class="hero-coffee"></div><div class="hero-milk"></div><div class="hero-straw"></div></div><span class="sparkle sp1">✦</span><span class="sparkle sp2">✧</span></div>
+    </section>
+
+    <section class="game-shell">
+      <div class="game-heading"><div><p class="eyebrow">YOUR LITTLE KITCHEN</p><h2>Dapur Dalgona</h2></div><div class="score-box">⭐ <span id="score">0</span> poin</div></div>
+      <div class="progress-wrap"><div class="progress-track"><div id="progressBar"></div></div><span id="stepCounter">Langkah 1 dari 6</span></div>
+
+      <div class="step-card">
+        <div class="step-number" id="stepNumber">01</div>
+        <div class="step-copy"><h3 id="stepTitle">Siapkan bahan</h3><p id="stepDescription">Seret kopi, gula, dan air panas ke dalam mangkuk.</p></div>
+        <span class="step-icon" id="stepIcon">🥣</span>
+      </div>
+
+      <div class="kitchen" id="kitchen">
+        <div class="shelf"><span>✿</span><span>☘</span><span>✿</span></div>
+        <div class="window"><div class="window-sun"></div><div class="window-hill"></div></div>
+        <div class="wall-clock">☼</div>
+        <div class="counter">
+          <div class="counter-line"></div>
+          <div class="station left-station">
+            <div class="station-label">BAHAN</div>
+            <div class="ingredients" id="ingredients">
+              <button class="ingredient" draggable="true" data-item="coffee"><span class="ingredient-art coffee-art">☕</span><b>Kopi</b><small>1 sdm</small></button>
+              <button class="ingredient" draggable="true" data-item="sugar"><span class="ingredient-art sugar-art">▧</span><b>Gula</b><small>1 sdm</small></button>
+              <button class="ingredient" draggable="true" data-item="water"><span class="ingredient-art water-art">💧</span><b>Air panas</b><small>1 sdm</small></button>
+              <button class="ingredient" draggable="true" data-item="milk"><span class="ingredient-art milk-art">🥛</span><b>Susu</b><small>secukupnya</small></button>
+              <button class="ingredient" draggable="true" data-item="ice"><span class="ingredient-art ice-art">🧊</span><b>Es batu</b><small>3 buah</small></button>
+            </div>
+          </div>
+          <div class="work-area">
+            <div class="station-label" id="workLabel">AREA MANGKUK</div>
+            <div class="bowl-area" id="bowlDrop">
+              <div class="bowl" id="bowl"><div class="bowl-mixture" id="mixture"></div><div class="bowl-rim"></div></div>
+              <div class="bowl-shadow"></div>
+              <span class="drop-hint" id="dropHint">Taruh bahan di sini</span>
+            </div>
+            <div class="glass-area hidden" id="glassDrop">
+              <div class="glass" id="glass"><div class="glass-milk" id="glassMilk"></div><div class="glass-ice" id="glassIce"></div><div class="glass-foam" id="glassFoam"></div><div class="glass-highlight"></div></div>
+              <div class="glass-shadow"></div>
+              <span class="drop-hint" id="glassHint">Taruh bahan di gelas</span>
+            </div>
+            <div class="whisk-area hidden" id="whiskArea"><div class="whisk-bowl"><div class="whisk-mixture" id="whiskMixture"></div></div><div class="whisk-hint">Gerakkan mouse / jari berulang kali di area ini!</div><div class="whisk-meter"><div id="whiskProgress"></div></div><small id="whiskCount">0 / 18 gerakan</small></div>
+            <div class="serve-area hidden" id="serveArea"><div class="serve-cup"><div class="serve-foam"></div><div class="serve-milk"></div><div class="serve-ice">◇ ◇</div></div><span class="serve-spark">✦</span><p>Dalgona Coffee siap dinikmati!</p></div>
+          </div>
+          <div class="plant">🌿</div>
+        </div>
+      </div>
+
+      <div class="instruction-row"><span class="tip-icon">💡</span><p id="instruction">Pilih bahan di sebelah kiri, lalu seret ke mangkuk.</p></div>
+      <div class="game-controls"><button class="btn btn-ghost" id="resetBtn">↻ Ulangi</button><button class="btn btn-primary" id="actionBtn" disabled>Selanjutnya →</button></div>
+    </section>
+
+    <footer>Made with <span>♥</span> and a little coffee magic · Dalgona Coffee Simulator</footer>
+  </main>
+
+  <div class="modal hidden" id="startModal"><div class="modal-card"><div class="modal-emoji">☕</div><p class="eyebrow">WELCOME TO YOUR KITCHEN</p><h2>Dalgona Coffee<br><em>Simulator</em></h2><p>Siap membuat kopi dalgona yang creamy dan cantik? Ikuti 6 langkah sederhana untuk menyelesaikan resep.</p><button class="btn btn-primary full" id="startBtn">Mulai memasak ✨</button><small>Gunakan mouse atau sentuhan layar.</small></div></div>
+  <div class="modal hidden" id="resultModal"><div class="modal-card result-card"><div class="modal-emoji">🏆</div><p class="eyebrow">COFFEE MASTER</p><h2>Yeay, berhasil!</h2><p>Dalgona Coffee buatanmu sudah siap disajikan.</p><div class="result-score"><strong id="finalScore">0</strong><span>POIN</span></div><p class="result-time">Waktu: <b id="finalTime">00:00</b></p><div class="result-cup"><div class="result-foam"></div><div class="result-milk"></div><div class="result-ice">◇ ◇</div></div><div class="modal-buttons"><button class="btn btn-ghost" id="homeBtn">⌂ Beranda</button><button class="btn btn-primary" id="againBtn">Main lagi ↻</button></div></div></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
